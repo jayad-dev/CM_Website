@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_layout_image_carousels",
+  "info": {
+    "displayName": "ImageCarousel"
+  },
+  "options": {},
+  "attributes": {
+    "backgroundImge": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "carouselImage1": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "carouselImage2": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": true
+    },
+    "carouselImage3": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "carouselImage4": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,56 @@
+{
+  "kind": "singleType",
+  "collectionName": "featured_initiatives",
+  "info": {
+    "singularName": "featured-initiative",
+    "pluralName": "featured-initiatives",
+    "displayName": "FeaturedInitiative"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "imageGrid1": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "imageGrid2": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "imageGrid3": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "imageGrid4": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "imageGrid5": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "imageGrid6": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "imageGrid7": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    }
+  }
+}

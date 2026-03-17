@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_page_cards",
+  "info": {
+    "singularName": "home-page-card",
+    "pluralName": "home-page-cards",
+    "displayName": "HomePageCard"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "Subheading": {
+      "type": "text"
+    },
+    "Block1": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "Block2": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "Block3": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    },
+    "Block4": {
+      "type": "component",
+      "component": "layout.card-component",
+      "repeatable": false
+    }
+  }
+}

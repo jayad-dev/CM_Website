@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_strip_banner_strip_baneers",
+  "info": {
+    "displayName": "stripBanner"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Heading": {
+      "type": "string"
+    },
+    "Subheading": {
+      "type": "text"
+    },
+    "EventButton": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

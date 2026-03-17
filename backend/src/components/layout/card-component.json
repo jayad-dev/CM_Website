@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_layout_card_components",
+  "info": {
+    "displayName": "CardComponent"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Heading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "LinkText": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
