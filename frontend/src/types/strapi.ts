@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// Strapi Media Types
 export interface StrapiMedia {
   id?: number;
   documentId?: string;
@@ -30,7 +29,6 @@ export interface MediaData {
   url?: string;
 }
 
-// Header Data from Strapi
 export interface HeaderData {
   id?: number;
   documentId?: string;
@@ -53,7 +51,6 @@ export interface HeaderData {
   locale?: string | null;
 }
 
-// Home Page Banner Data
 export interface HomePageBannerData {
   id?: number;
   documentId?: string;
@@ -82,7 +79,6 @@ export interface StripBannerData {
   locale?: string | null;
 }
 
-// Home Page Card Block
 export interface HomePageCardBlock {
   id?: number;
   Heading: string;
@@ -91,7 +87,6 @@ export interface HomePageCardBlock {
   image?: MediaData | any;
 }
 
-// Home Page Card Section
 export interface HomePageCardData {
   id?: number;
   Heading: string;
@@ -110,7 +105,7 @@ export interface FeaturedInitiativeBlock {
   id?: number;
   Heading: string;
   description: string;
-  // LinkText?: string;
+  LinkText?: string;
   image?: MediaData | any;
 }
 
@@ -125,6 +120,34 @@ export interface FeaturedInitiativeData {
   imageGrid5?: FeaturedInitiativeBlock;
   imageGrid6?: FeaturedInitiativeBlock;
   imageGrid7?: FeaturedInitiativeBlock;
+
+}
+export interface FooterLink {
+  id?: number;
+  label?: string;
+  url?: string;
+}
+export interface SocialLink {
+  id?: number;
+  Platform?: string;
+  url?: string;
+}
+export interface FooterData {
+  id?: number;
+  documentId?: string;
+  Logo?: MediaData | any;
+  description?: string;
+  ContactTitle?: string;
+  Address?: string;
+  Email?: string;
+  NewsletterTitle?: string;
+  QuickLinks?: FooterLink[];
+  Resources?: FooterLink[];
+  SocialLink?: SocialLink[];
+  copyrightText?: string;
+  badgeText?: string;
+  vectorImage?: MediaData | any;
+
 
 }
 export interface StrapiResponse<T> {

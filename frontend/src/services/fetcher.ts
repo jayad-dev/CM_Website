@@ -11,6 +11,7 @@ export async function getHeader() {
 }
 
 export async function getHomePageBanner() {
+
   try {
     const res = await api.get(
       "/api/home-page-banner?populate[banner][populate]=*&populate[stripBanner][populate]=*"
@@ -58,6 +59,15 @@ export async function getCollection(endpoint: string) {
   }
 }
 
+export async function getFooter() {
+  try {
+    const res = await api.get("/api/footer?populate=*");
+    return res.data.data;
+  } catch (error) {
+    console.error("Error fetching footer:", error);
+    return null;
+  }
+}
 export async function getSingleItem(endpoint: string, id: string | number) {
   try {
     const res = await api.get(`/api/${endpoint}/${id}?populate=*`);

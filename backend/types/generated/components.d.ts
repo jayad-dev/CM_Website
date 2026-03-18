@@ -13,14 +13,6 @@ export interface LayoutCardComponent extends Struct.ComponentSchema {
   };
 }
 
-export interface LayoutFooter extends Struct.ComponentSchema {
-  collectionName: 'components_layout_footers';
-  info: {
-    displayName: 'Footer';
-  };
-  attributes: {};
-}
-
 export interface LayoutImageCarousel extends Struct.ComponentSchema {
   collectionName: 'components_layout_image_carousels';
   info: {
@@ -34,6 +26,30 @@ export interface LayoutImageCarousel extends Struct.ComponentSchema {
     carouselImage2: Schema.Attribute.Component<'layout.card-component', true>;
     carouselImage3: Schema.Attribute.Component<'layout.card-component', false>;
     carouselImage4: Schema.Attribute.Component<'layout.card-component', false>;
+  };
+}
+
+export interface SharedLink extends Struct.ComponentSchema {
+  collectionName: 'components_shared_links';
+  info: {
+    displayName: 'Link';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface SharedSocialLink extends Struct.ComponentSchema {
+  collectionName: 'components_shared_social_links';
+  info: {
+    displayName: 'SocialLink';
+  };
+  attributes: {
+    Platform: Schema.Attribute.Enumeration<
+      ['Facebook', ' Twitter', ' Instagram', 'YouTube']
+    >;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -54,8 +70,9 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'layout.card-component': LayoutCardComponent;
-      'layout.footer': LayoutFooter;
       'layout.image-carousel': LayoutImageCarousel;
+      'shared.link': SharedLink;
+      'shared.social-link': SharedSocialLink;
       'strip-banner.strip-baneer': StripBannerStripBaneer;
     }
   }

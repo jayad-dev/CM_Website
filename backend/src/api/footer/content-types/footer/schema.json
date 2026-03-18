@@ -11,10 +11,61 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "footer": {
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "ContactTitle": {
+      "type": "string"
+    },
+    "Address": {
+      "type": "text"
+    },
+    "Email": {
+      "type": "string"
+    },
+    "NewsletterTitle": {
+      "type": "string"
+    },
+    "QuickLinks": {
       "type": "component",
-      "component": "layout.footer",
-      "repeatable": false
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "Resources": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "SocialLink": {
+      "type": "component",
+      "component": "shared.social-link",
+      "repeatable": true
+    },
+    "copyrightText": {
+      "type": "string"
+    },
+    "vectorImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "badgeText": {
+      "type": "string"
     }
   }
 }
