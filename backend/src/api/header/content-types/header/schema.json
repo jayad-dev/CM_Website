@@ -21,41 +21,10 @@
         "audios"
       ]
     },
-    "YourPath": {
-      "type": "string"
-    },
-    "FreeClasses": {
-      "type": "string"
-    },
-    "Events": {
-      "type": "string"
-    },
-    "SevaVolunteering": {
-      "type": "string"
-    },
-    "CM75Events": {
-      "type": "string"
-    },
-    "About": {
-      "type": "string"
-    },
-    "yourPathLink": {
-      "type": "string"
-    },
-    "freeClassesLink": {
-      "type": "string"
-    },
-    "eventsLink": {
-      "type": "string"
-    },
-    "SevaVolunteeringLink": {
-      "type": "string"
-    },
-    "CM75EventsLink": {
-      "type": "string"
-    },
-    "aboutLink": {
-      "type": "string"
+    "menuitems": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
     }
   }
 }

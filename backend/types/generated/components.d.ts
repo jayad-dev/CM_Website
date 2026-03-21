@@ -29,6 +29,19 @@ export interface LayoutImageCarousel extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutImages extends Struct.ComponentSchema {
+  collectionName: 'components_layout_images';
+  info: {
+    displayName: 'Images';
+  };
+  attributes: {
+    carouselImages: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -71,6 +84,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'layout.card-component': LayoutCardComponent;
       'layout.image-carousel': LayoutImageCarousel;
+      'layout.images': LayoutImages;
       'shared.link': SharedLink;
       'shared.social-link': SharedSocialLink;
       'strip-banner.strip-baneer': StripBannerStripBaneer;

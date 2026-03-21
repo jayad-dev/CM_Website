@@ -28,27 +28,25 @@ export interface MediaData {
   attributes?: StrapiMedia;
   url?: string;
 }
-
+export interface HeaderLink {
+  id?: number;
+  label?: string;
+  url?: string;
+}
 export interface HeaderData {
   id?: number;
   documentId?: string;
   logo?: MediaData | any;
-  YourPath?: string;
-  FreeClasses?: string;
-  Events?: string;
-  SevaVolunteering?: string;
-  About?: string;
-  CM75Events?: string;
-  yourPathLink?: string;
-  CM75EventsLink?: string;
-  sevavolunteeringLink?: string;
-  freeClassesLink?: string;
-  eventsLink?: string;
-  aboutLink?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  publishedAt?: string;
-  locale?: string | null;
+  menuitems?: HeaderLink[];
+}
+export interface CarouselImage {
+  id?: number;
+  image?: MediaData | any;
+}
+
+export interface BannerImagesBlock {
+  id?: number;
+  carouselImages?: CarouselImage[];
 }
 
 export interface HomePageBannerData {
@@ -58,7 +56,7 @@ export interface HomePageBannerData {
   subheading?: string;
   aboutText?: string;
   buttonText?: string;
-  banner?: MediaData | any;
+  bannerImages?: BannerImagesBlock[];
   stripBanner?: StripBannerData;
   createdAt?: string;
   updatedAt?: string;
@@ -149,6 +147,19 @@ export interface FooterData {
   vectorImage?: MediaData | any;
 
 
+}
+export interface FeaturedImageItem {
+  id?: number;
+  carouselImages?: MediaData | any;
+}
+export interface FeaturedImagesData {
+  id?: number;
+  Heading?: string;
+  images?: {
+    id?: number;
+    carouselImages?: MediaData | any;
+  }[];
+  backgroundImage?: MediaData | any;
 }
 export interface StrapiResponse<T> {
   data: T;

@@ -37,6 +37,11 @@
       "type": "component",
       "component": "strip-banner.strip-baneer",
       "repeatable": false
+    },
+    "bannerImages": {
+      "type": "component",
+      "component": "layout.images",
+      "repeatable": true
     }
   }
 }

@@ -430,6 +430,38 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFeaturedImageFeaturedImage extends Struct.SingleTypeSchema {
+  collectionName: 'featured_images';
+  info: {
+    displayName: 'FeaturedImages';
+    pluralName: 'featured-images';
+    singularName: 'featured-image';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    backgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Heading: Schema.Attribute.String;
+    images: Schema.Attribute.Component<'layout.images', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::featured-image.featured-image'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFeaturedInitiativeFeaturedInitiative
   extends Struct.SingleTypeSchema {
   collectionName: 'featured_initiatives';
@@ -519,17 +551,9 @@ export interface ApiHeaderHeader extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    About: Schema.Attribute.String;
-    aboutLink: Schema.Attribute.String;
-    CM75Events: Schema.Attribute.String;
-    CM75EventsLink: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Events: Schema.Attribute.String;
-    eventsLink: Schema.Attribute.String;
-    FreeClasses: Schema.Attribute.String;
-    freeClassesLink: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -537,14 +561,11 @@ export interface ApiHeaderHeader extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    menuitems: Schema.Attribute.Component<'shared.link', true>;
     publishedAt: Schema.Attribute.DateTime;
-    SevaVolunteering: Schema.Attribute.String;
-    SevaVolunteeringLink: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    YourPath: Schema.Attribute.String;
-    yourPathLink: Schema.Attribute.String;
   };
 }
 
@@ -565,6 +586,7 @@ export interface ApiHomePageBannerHomePageBanner
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    bannerImages: Schema.Attribute.Component<'layout.images', true>;
     buttonText: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1129,6 +1151,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::featured-image.featured-image': ApiFeaturedImageFeaturedImage;
       'api::featured-initiative.featured-initiative': ApiFeaturedInitiativeFeaturedInitiative;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;

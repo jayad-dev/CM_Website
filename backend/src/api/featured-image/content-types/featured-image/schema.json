@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "featured_images",
+  "info": {
+    "singularName": "featured-image",
+    "pluralName": "featured-images",
+    "displayName": "FeaturedImages"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "images": {
+      "type": "component",
+      "component": "layout.images",
+      "repeatable": true
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

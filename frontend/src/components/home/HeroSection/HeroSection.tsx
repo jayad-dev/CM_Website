@@ -1,6 +1,4 @@
-
 "use client";
-
 import {
   Container,
   Title,
@@ -13,160 +11,216 @@ import {
   Stack,
   Box,
 } from "@mantine/core";
+import { Carousel } from "@mantine/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 import Link from "next/link";
 import { IconArrowRight } from "@tabler/icons-react";
 import { HomePageBannerData } from "@/types/strapi";
 import { getMediaUrls } from "@/lib/strapi";
 import { Philosopher } from "next/font/google";
 
-const philosopher = Philosopher({
+const philosopher = Philosopher( {
   subsets: ["latin"],
   weight: ["400", "700"],
-});
+} );
 
 interface HeroSectionProps {
   bannerData: HomePageBannerData | null;
 }
 
-export default function HeroSection({ bannerData }: HeroSectionProps) {
-  const bannerImages = bannerData?.banner
-    ? getMediaUrls(bannerData.banner)
-    : [];
+export default function HeroSection( { bannerData }: HeroSectionProps ) {
+  const autoplay = useRef(
+    Autoplay( {
+      delay: 2500,
+      stopOnInteraction: false,
+      stopOnMouseEnter: false,
+    } )
+  );
 
-  const bannerImage = bannerImages?.[0];
+  const carouselImages =
+    bannerData?.bannerImages?.[0]?.carouselImages?.map( ( item ) =>
+      getMediaUrls( item )?.[0]
+    ) || [];
 
-  const badgeText =
-    bannerData?.Heading ||
-    "Celebrating 75 Years of Spiritual Excellence";
-
-  const heroHeading =
+  const heading =
     bannerData?.subheading ||
     "Timeless Hindu Wisdom, Made Clear.";
-    const words = heroHeading.split(" ");
-    const firstWord = words[0];      
-    const secondWord = words[1]; 
-    const restText = words.slice(2).join(" ");
 
-  const description =
-    bannerData?.aboutText ||
-    "Chinmaya Mission UK offers a wide range of study forums and activities.";
-
-  const buttonText =
-    bannerData?.buttonText || "Start Discovering";
+  const words = heading.split( " " );
 
   return (
-    <Box
-      py={{ base: 60, md: 100 }}
-      style={{
-        background: "#F6F4F3",
-      }}
-    >
+    <Box bg="#F6F4F3" py={ { base: 60, md: 100 } }>
       <Container size="xl">
-        <Grid align="center" gutter={60}>
-          <GridCol span={{ base: 12, md: 6 }}>
-            <Stack gap={24}>
-                <Badge
+        <Grid align="center" gutter={ 60 }>
+          <GridCol span={ { base: 12, md: 6 } }>
+            <Stack gap={ 24 }>
+              <Badge
                 radius="xl"
-                px={16}
-                py={6}
+                px={ 16 }
+                py={ 6 }
                 w="fit-content"
-                style={{
-                  background: "#F5E2C8",
-                  color: "#D97706",
-                  fontWeight: 500,
-                  textTransform: "none",
-                }}
+                styles={ {
+                  root: {
+                    background: "#F5E2C8",
+                    color: "#D97706",
+                  },
+                } }
               >
-                {badgeText}
+                { bannerData?.Heading ||
+                  "Celebrating 75 Years of Spiritual Excellence" }
               </Badge>
 
               <Title
-  order={1}
-  className={philosopher.className}
-  style={{
-    fontWeight: 700,
-    fontSize: "clamp(40px, 5vw, 72px)",
-    lineHeight: "1.1",
-    letterSpacing: "-1.8px",
-    color: "#4B4B4B",
-    maxWidth: "640px",
-  }}
->
-  <span
-    style={{
-      background:
-        "linear-gradient(99.12deg, #C62B35 -15.03%, #EF7F25 100%)",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-    }}
-  >
-    {firstWord}
-  </span>{" "}
-  {secondWord}
-  <br />
-  {restText}
-</Title>
-
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: "#666",
-                  maxWidth: 520,
-                  lineHeight: 1.7,
-                }}
+                order={ 1 }
+                className={ philosopher.className }
+                styles={ {
+                  root: {
+                    fontSize: "clamp(40px, 5vw, 72px)",
+                    lineHeight: 1.1,
+                    color: "#4B4B4B",
+                  },
+                } }
               >
-                {description}
+                <span
+                  style={ {
+                    background:
+                      "linear-gradient(99deg, #C62B35, #EF7F25)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  } }
+                >
+                  { words[0] }
+                </span>{ " " }
+                { words[1] }
+                <br />
+                { words.slice( 2 ).join( " " ) }
+              </Title>
+
+              <Text c="gray.6" maw={ 520 } lh={ 1.7 } fz={ 16 }>
+                { bannerData?.aboutText }
               </Text>
 
-              <Link href="/discover" style={{ width: "fit-content" }}>
+              <Link href="/discover">
                 <Button
                   radius="md"
-                  h={44}
-                  px={26}
-                  rightSection={<IconArrowRight size={18} />}
-                  style={{
-                    background: "#BA324F",
-                    fontWeight: 500,
-                  }}
+                  h={ 44 }
+                  px={ 26 }
+                  rightSection={ <IconArrowRight size={ 18 } /> }
+                  styles={ {
+                    root: {
+                      background: "#BA324F",
+                    },
+                  } }
                 >
-                  {buttonText}
+                  { bannerData?.buttonText || "Start Discovering" }
                 </Button>
               </Link>
             </Stack>
           </GridCol>
 
-          <GridCol span={{ base: 12, md: 6 }}>
+          <GridCol span={ { base: 12, md: 6 } }>
             <Box
-              style={{
-                borderRadius: 16,
-                overflow: "hidden",
-              }}
+              style={ {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              } }
             >
-              {bannerImage ? (
-                <Image
-                  src={bannerImage}
-                  alt={heroHeading}
-                  radius="lg"
-                  h={420}
-                  fit="cover"
-                />
-              ) : (
-                <Box
-                  h={420}
-                  style={{
-                    background: "#eee",
-                    borderRadius: 16,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text c="dimmed">No image available</Text>
-                </Box>
-              )}
+              <Box
+                style={ {
+                  width: 440,
+                  height: 440,
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  position: "relative",
+                } }
+              >
+                { carouselImages.length > 0 ? (
+                  <Carousel
+                    withIndicators
+                    withControls={ false }
+                    loop
+                    slideSize="100%"
+                    slideGap={ 0 }
+                    align="start"
+                    height={ 440 }
+                    plugins={ [autoplay.current] }
+                    classNames={ {
+                      indicator: "custom-indicator",
+                    } }
+                    styles={ {
+                      viewport: {
+                        overflow: "hidden",
+                      },
+                      container: {
+                        display: "flex",
+                      },
+                      slide: {
+                        flex: "0 0 100%",
+                      },
+
+                      indicators: {
+                        position: "absolute",
+                        bottom: 10,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        display: "flex",
+                        gap: 8,
+                      },
+
+                      indicator: {
+                        width: 12,
+                        height: 12,
+                        transform: "rotate(45deg)",
+                        borderRadius: 2,
+                        background: "#DEDEDE54",
+                        transition: "all 0.3s ease",
+                      },
+                    } }
+                  >
+                    { carouselImages.map( ( img, index ) => (
+                      <Carousel.Slide key={ index }>
+                        <Box
+                          style={ {
+                            width: 440,
+                            height: 440,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            background: "#f5f5f5",
+                          } }
+                        >
+                          <Image
+                            src={ img }
+                            alt={ `banner-${index}` }
+                            width={ 440 }
+                            height={ 440 }
+                            // width={ 380 }
+                            // height={ 380 }
+                            fit="contain"
+                          />
+                        </Box>
+                      </Carousel.Slide>
+                    ) ) }
+                  </Carousel>
+                ) : (
+                  <Box
+                    style={ {
+                      width: 440,
+                      height: 440,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: "#eee",
+                    } }
+                  >
+                    <Text c="dimmed">No image available</Text>
+                  </Box>
+                ) }
+              </Box>
             </Box>
           </GridCol>
-
         </Grid>
       </Container>
     </Box>

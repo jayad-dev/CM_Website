@@ -11,14 +11,24 @@ export async function getHeader() {
 }
 
 export async function getHomePageBanner() {
-
   try {
     const res = await api.get(
-      "/api/home-page-banner?populate[banner][populate]=*&populate[stripBanner][populate]=*"
+      `/api/home-page-banner?populate[bannerImages][populate][carouselImages][populate]=*&populate[stripBanner][populate]=*`
     );
     return res.data.data;
   } catch (error) {
     console.error("Error fetching home page banner:", error);
+    return null;
+  }
+}
+export async function getFeaturedImages() {
+  try {
+    const res = await api.get(
+      "/api/featured-image?populate[images][populate][carouselImages][populate]=*&populate[backgroundImage][populate]=*"
+    );
+    return res.data.data;
+  } catch (error) {
+    console.error("Error fetching featured images:", error);
     return null;
   }
 }
