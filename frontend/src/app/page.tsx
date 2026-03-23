@@ -1,17 +1,23 @@
 
-import { getHomePageBanner, getHomePageCards, getFeaturedInitiatives, getFeaturedImages } from "@/services/fetcher";
-import StripBanner from "@/components/home/StripBanner";
-import HeroSection from "@/components/home/HeroSection";
-import HomePageCards from "@/components/home/HomePageCard/HomePageCards";
-import FeaturedInitiatives from "@/components/home/FeaturedInitiatives/FeaturedInitiatives";
-import FeaturedEvents from "@/components/home/FeaturedInitiatives/FeaturedImage";
+import {
+  FeaturedEvents,
+  FeaturedInitiatives,
+  HeroSection,
+  HomePageCards,
+  StripBanner,
+} from "@/components";
+import {
+  getFeaturedImages,
+  getFeaturedInitiatives,
+  getHomePageBanner,
+  getHomePageCards,
+} from "@/services/fetcher";
 
 export default async function Home() {
   const bannerData = await getHomePageBanner();
   const cardsData = await getHomePageCards();
   const featuredData = await getFeaturedInitiatives();
-  const featuredImages = await getFeaturedImages()
-  console.log( featuredImages, 'featuredImages' );
+  const featuredImages = await getFeaturedImages();
   const stripBannerData = bannerData?.stripBanner || null;
 
   return (

@@ -1,3 +1,4 @@
+
 "use client";
 import "@mantine/carousel/styles.css";
 import {
@@ -26,29 +27,28 @@ export default function FeaturedEvents( { data }: Props ) {
         ) || [];
 
     const carouselRef = useRef<EmblaCarouselType | null>( null );
-
     const [activeGroup, setActiveGroup] = useState<number>( 0 );
 
     return (
         <Box
-            py={ 80 }
+            py={ 50 }
             w="100%"
+            my={ 30 }
             style={ {
                 background:
                     "radial-gradient(circle at center, #4b3f72 0%, #1a1b2e 70%)",
             } }
-            my={ 40 }
         >
-            <Container size={ 1220 } pos="relative">
+            <Container size={ 960 } pos="relative">
 
                 <Title
                     ta="center"
-                    mb={ 50 }
+                    mb={ 30 }
                     c="#f4b860"
                     fw={ 700 }
                     style={ {
                         fontFamily: "Philosopher, serif",
-                        fontSize: 48,
+                        fontSize: 36,
                     } }
                 >
                     { data?.Heading }
@@ -58,10 +58,10 @@ export default function FeaturedEvents( { data }: Props ) {
 
                     <Flex
                         pos="absolute"
-                        left={ -70 }
+                        left={ -100 }
                         top="50%"
-                        w={ 56 }
-                        h={ 56 }
+                        w={ 44 }
+                        h={ 44 }
                         justify="center"
                         align="center"
                         bd="1px solid rgba(255,255,255,0.4)"
@@ -75,15 +75,15 @@ export default function FeaturedEvents( { data }: Props ) {
                         } }
                         onClick={ () => carouselRef.current?.scrollPrev() }
                     >
-                        <IconChevronLeft color="white" />
+                        <IconChevronLeft size={ 18 } color="white" />
                     </Flex>
 
                     <Flex
                         pos="absolute"
-                        right={ -70 }
+                        right={ -100 }
                         top="50%"
-                        w={ 56 }
-                        h={ 56 }
+                        w={ 44 }
+                        h={ 44 }
                         justify="center"
                         align="center"
                         bd="1px solid rgba(255,255,255,0.4)"
@@ -97,7 +97,7 @@ export default function FeaturedEvents( { data }: Props ) {
                         } }
                         onClick={ () => carouselRef.current?.scrollNext() }
                     >
-                        <IconChevronRight color="white" />
+                        <IconChevronRight size={ 18 } color="white" />
                     </Flex>
 
                     <Carousel
@@ -108,22 +108,22 @@ export default function FeaturedEvents( { data }: Props ) {
                                 setActiveGroup( Math.floor( index / 3 ) );
                             } );
                         } }
-                        slideSize="395px"
+                        slideSize="300px"
                         slideGap="md"
                         align="start"
                         slidesToScroll={ 3 }
                         containScroll="keepSnaps"
                         withControls={ false }
                     >
-                        { images.map( ( img: string, index: number ) => (
+                        { images.map( ( img, index ) => (
                             <Carousel.Slide
                                 key={ index }
                                 style={ { flex: "0 0 auto" } }
                             >
                                 <Paper
-                                    radius={ 12 }
-                                    w={ 395 }
-                                    h={ 445 }
+                                    radius="md"
+                                    w={ 300 }
+                                    h={ 340 }
                                     style={ { overflow: "hidden" } }
                                 >
                                     <Image
@@ -138,12 +138,12 @@ export default function FeaturedEvents( { data }: Props ) {
                     </Carousel>
                 </Box>
 
-                <Flex justify="center" mt={ 30 } gap={ 6 }>
+                <Flex justify="center" mt={ 20 } gap={ 5 }>
                     { images.map( ( _, index ) => (
                         <Box
                             key={ index }
-                            w={ activeGroup === Math.floor( index / 3 ) ? 28 : 12 }
-                            h={ 4 }
+                            w={ activeGroup === Math.floor( index / 3 ) ? 22 : 10 }
+                            h={ 3 }
                             bg={
                                 activeGroup === Math.floor( index / 3 )
                                     ? "white"

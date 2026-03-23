@@ -16,6 +16,7 @@ import { FiSearch } from "react-icons/fi";
 import { useState } from "react";
 import { HeaderData } from "@/types/strapi";
 import { getMediaUrl } from "@/lib/strapi";
+import { APP_MENU_LINKS, APP_ROUTES } from "@/app/routes";
 
 interface HeaderProps {
   data: HeaderData | null;
@@ -25,13 +26,15 @@ export default function Header( { data }: HeaderProps ) {
   const [openSearch, setOpenSearch] = useState( false );
   const [opened, setOpened] = useState( false );
 
-  const navLinks =
-    data?.menuitems?.filter( ( item ) => item?.label && item?.url ).map(
-      ( item ) => ( {
+  const cmsNavLinks =
+    data?.menuitems
+      ?.filter( ( item ) => item?.label && item?.url )
+      .map( ( item ) => ( {
         label: item.label!,
-        href: `/${item.url}`,
-      } )
-    ) || [];
+        href: item.url?.startsWith( "/" ) ? item.url : `/${item.url}`,
+      } ) ) || [];
+
+  const navLinks = cmsNavLinks.length > 0 ? cmsNavLinks : APP_MENU_LINKS;
 
 
 
@@ -104,7 +107,7 @@ export default function Header( { data }: HeaderProps ) {
 
               <Button
                 component={ Link }
-                href="/discover"
+                href={ APP_ROUTES.discover }
                 radius="md"
                 style={ {
                   background: "white",
@@ -151,7 +154,7 @@ export default function Header( { data }: HeaderProps ) {
 
           <Button
             component={ Link }
-            href="/discover"
+            href={ APP_ROUTES.discover }
             radius="md"
             style={ {
               background: "#7B2E36",
