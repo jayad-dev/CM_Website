@@ -42,6 +42,22 @@ export interface LayoutImages extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsEventItem extends Struct.ComponentSchema {
+  collectionName: 'components_sections_event_items';
+  info: {
+    displayName: 'EventItem';
+  };
+  attributes: {
+    Capacity: Schema.Attribute.String;
+    DateText: Schema.Attribute.String;
+    Icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Label: Schema.Attribute.String;
+    Location: Schema.Attribute.String;
+    Time: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -85,6 +101,7 @@ declare module '@strapi/strapi' {
       'layout.card-component': LayoutCardComponent;
       'layout.image-carousel': LayoutImageCarousel;
       'layout.images': LayoutImages;
+      'sections.event-item': SectionsEventItem;
       'shared.link': SharedLink;
       'shared.social-link': SharedSocialLink;
       'strip-banner.strip-baneer': StripBannerStripBaneer;

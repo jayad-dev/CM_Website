@@ -640,6 +640,37 @@ export interface ApiHomePageCardHomePageCard extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiUpcommingEventsUpcommingEvents
+  extends Struct.SingleTypeSchema {
+  collectionName: 'upcomming_event';
+  info: {
+    displayName: 'UpcommingEvents';
+    pluralName: 'upcomming-event';
+    singularName: 'upcomming-events';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    EventItems: Schema.Attribute.Component<'sections.event-item', true>;
+    Heading: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::upcomming-events.upcomming-events'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Subheading: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1157,6 +1188,7 @@ declare module '@strapi/strapi' {
       'api::header.header': ApiHeaderHeader;
       'api::home-page-banner.home-page-banner': ApiHomePageBannerHomePageBanner;
       'api::home-page-card.home-page-card': ApiHomePageCardHomePageCard;
+      'api::upcomming-events.upcomming-events': ApiUpcommingEventsUpcommingEvents;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -29,15 +29,28 @@ export async function fetchStrapiData(path: string) {
 
 /* ---------------- SINGLE MEDIA ---------------- */
 
-export function getStrapiMedia(url: string | null) {
+// export function getStrapiMedia(url: string | null) {
+//   if (!url) return null;
+
+//   if (url.startsWith("http") || url.startsWith("//")) {
+//     return url;
+//   }
+
+//   return `${STRAPI_URL}${url}`;
+// }
+export const getStrapiMedia = (url?: string | null) => {
   if (!url) return null;
 
-  if (url.startsWith("http") || url.startsWith("//")) {
-    return url;
-  }
+  // If already absolute
+  if (url.startsWith("http")) return url;
 
-  return `${STRAPI_URL}${url}`;
-}
+  // Add backend URL (always use the fallback-enabled STRAPI_URL)
+  // Next/Image requires an absolute URL or a leading slash path.
+  if (url.startsWith("/")) {
+    return `${STRAPI_URL}${url}`;
+  }
+  return `${STRAPI_URL}/${url}`;
+};
 
 export function getMediaUrl(media: any): string | null {
   if (!media) {

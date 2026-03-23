@@ -1,16 +1,18 @@
-
 import {
   FeaturedEvents,
   FeaturedInitiatives,
   HeroSection,
   HomePageCards,
   StripBanner,
+  UpcomingEvents,
 } from "@/components";
+
 import {
   getFeaturedImages,
   getFeaturedInitiatives,
   getHomePageBanner,
   getHomePageCards,
+  getUpcomingEvents,
 } from "@/services/fetcher";
 
 export default async function Home() {
@@ -18,6 +20,8 @@ export default async function Home() {
   const cardsData = await getHomePageCards();
   const featuredData = await getFeaturedInitiatives();
   const featuredImages = await getFeaturedImages();
+  const upcomingEvents = await getUpcomingEvents();
+
   const stripBannerData = bannerData?.stripBanner || null;
 
   return (
@@ -27,7 +31,7 @@ export default async function Home() {
       <HomePageCards data={ cardsData } />
       <FeaturedInitiatives data={ featuredData } />
       <FeaturedEvents data={ featuredImages } />
-
+      <UpcomingEvents data={ upcomingEvents } />
     </>
   );
 }

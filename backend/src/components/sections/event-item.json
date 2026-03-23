@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_sections_event_items",
+  "info": {
+    "displayName": "EventItem"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "DateText": {
+      "type": "string"
+    },
+    "Time": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "Capacity": {
+      "type": "string"
+    },
+    "Label": {
+      "type": "string"
+    },
+    "Icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

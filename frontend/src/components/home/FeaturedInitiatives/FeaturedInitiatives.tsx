@@ -8,8 +8,8 @@ interface Props {
   data: FeaturedInitiativeData;
 }
 
-export default function FeaturedInitiatives({ data }: Props) {
-  if (!data) return null;
+export default function FeaturedInitiatives( { data }: Props ) {
+  if ( !data ) return null;
 
   const gridItems = [
     data.imageGrid1,
@@ -18,28 +18,27 @@ export default function FeaturedInitiatives({ data }: Props) {
     data.imageGrid4,
     data.imageGrid5,
     data.imageGrid6,
-  ].filter(Boolean);
-  console.log(data.Heading,'heading');
-  console.log(data,'data');
-  
+  ].filter( Boolean );
+
+
 
   return (
-    <Box bg="#FDF1F4" py={60}>
+    <Box bg="#FDF1F4" py={ 60 }>
       <Container size="xl">
-        <Stack align="center" gap="xs" mb={40}>
-          <Title order={2} c="#9B1C2E">
-            {data.Heading}
+        <Stack align="center" gap="xs" mb={ 40 }>
+          <Title order={ 2 } c="#9B1C2E">
+            { data.Heading }
           </Title>
 
-          <Text c="#555" ta="center" maw={600}>
-            {data?.subheading}
+          <Text c="#555" ta="center" maw={ 600 }>
+            { data?.subheading }
           </Text>
         </Stack>
 
-        <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
-          {gridItems.map((item, index) => (
-            <InitiativeCard key={index} item={item!} />
-          ))}
+        <SimpleGrid cols={ { base: 1, sm: 2, md: 3 } } spacing="lg">
+          { gridItems.map( ( item, index ) => (
+            <InitiativeCard key={ index } item={ item! } />
+          ) ) }
         </SimpleGrid>
       </Container>
     </Box>

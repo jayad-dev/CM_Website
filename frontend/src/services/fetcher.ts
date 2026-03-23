@@ -87,3 +87,17 @@ export async function getSingleItem(endpoint: string, id: string | number) {
     return null;
   }
 }
+
+export async function getUpcomingEvents() {
+  try {
+    const res = await api.get(
+      "/api/upcomming-events?populate[EventItems][populate][Icon][populate]=*"
+    );
+
+    return res.data.data;
+
+  } catch (error) {
+    console.error("Error fetching upcoming events:", error);
+    return null;
+  }
+}

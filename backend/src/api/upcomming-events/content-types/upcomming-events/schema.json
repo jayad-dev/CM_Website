@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "upcomming_event",
+  "info": {
+    "singularName": "upcomming-events",
+    "pluralName": "upcomming-event",
+    "displayName": "UpcommingEvents"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "Subheading": {
+      "type": "string"
+    },
+    "EventItems": {
+      "type": "component",
+      "component": "sections.event-item",
+      "repeatable": true
+    }
+  }
+}

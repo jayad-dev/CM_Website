@@ -161,6 +161,23 @@ export interface FeaturedImagesData {
   }[];
   backgroundImage?: MediaData | any;
 }
+export interface UpcomingEventItem {
+  id?: number;
+  Title?: string;
+  DateText?: string;
+  Time?: string;
+  Location?: string;
+  Capacity?: string;
+  Label?: string;
+  Icon?: MediaData | any;
+}
+
+export interface UpcomingEventsData {
+  id?: number;
+  Heading?: string;
+  Subheading?: string;
+  EventItems?: UpcomingEventItem[];
+}
 export interface StrapiResponse<T> {
   data: T;
   meta?: {
