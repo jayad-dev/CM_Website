@@ -42,6 +42,11 @@
       "type": "component",
       "component": "layout.images",
       "repeatable": true
+    },
+    "LatestNews": {
+      "type": "component",
+      "component": "sections.featured-news-section",
+      "repeatable": false
     }
   }
 }

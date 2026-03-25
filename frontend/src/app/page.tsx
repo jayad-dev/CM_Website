@@ -6,12 +6,14 @@ import {
   StripBanner,
   UpcomingEvents,
 } from "@/components";
+import LatestNews from "@/components/common/LatestNews/LatestNews";
 
 import {
   getFeaturedImages,
   getFeaturedInitiatives,
   getHomePageBanner,
   getHomePageCards,
+  getLatestNews,
   getUpcomingEvents,
 } from "@/services/fetcher";
 
@@ -21,8 +23,9 @@ export default async function Home() {
   const featuredData = await getFeaturedInitiatives();
   const featuredImages = await getFeaturedImages();
   const upcomingEvents = await getUpcomingEvents();
-
+  const latestNews = await getLatestNews();
   const stripBannerData = bannerData?.stripBanner || null;
+  console.log( "latestNews", latestNews );
 
   return (
     <>
@@ -32,6 +35,7 @@ export default async function Home() {
       <FeaturedInitiatives data={ featuredData } />
       <FeaturedEvents data={ featuredImages } />
       <UpcomingEvents data={ upcomingEvents } />
+      <LatestNews data={ latestNews } />
     </>
   );
 }

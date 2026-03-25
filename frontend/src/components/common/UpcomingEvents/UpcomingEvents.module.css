@@ -1,0 +1,9 @@
+.scrollArea {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollArea::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+

@@ -76,6 +76,7 @@ export default function Footer( { data }: FooterProps ) {
             alt="bg"
             fill
             style={ { objectFit: "contain" } }
+            unoptimized
           />
         </Box>
       ) }
@@ -85,7 +86,13 @@ export default function Footer( { data }: FooterProps ) {
           <Grid.Col span={ { base: 12, md: 4 } }>
             <Stack gap="md">
               { logo && (
-                <Image src={ logo } alt="logo" width={ 140 } height={ 70 } />
+                <Image
+                  src={ logo }
+                  alt="logo"
+                  width={ 140 }
+                  height={ 70 }
+                  unoptimized
+                />
               ) }
 
               <Text c="rgba(255,255,255,0.7)" fz={ 14 } maw={ 260 }>

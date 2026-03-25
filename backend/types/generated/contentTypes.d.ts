@@ -592,6 +592,10 @@ export interface ApiHomePageBannerHomePageBanner
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Heading: Schema.Attribute.String;
+    LatestNews: Schema.Attribute.Component<
+      'sections.featured-news-section',
+      false
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

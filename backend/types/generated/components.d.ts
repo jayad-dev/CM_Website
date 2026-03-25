@@ -42,6 +42,21 @@ export interface LayoutImages extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutNewsCard extends Struct.ComponentSchema {
+  collectionName: 'components_layout_news_cards';
+  info: {
+    displayName: 'NewsCard';
+  };
+  attributes: {
+    CategoryList: Schema.Attribute.Component<'shared.link', true>;
+    Date: Schema.Attribute.Date;
+    Description: Schema.Attribute.Text;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Slug: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
+  };
+}
+
 export interface SectionsEventItem extends Struct.ComponentSchema {
   collectionName: 'components_sections_event_items';
   info: {
@@ -55,6 +70,20 @@ export interface SectionsEventItem extends Struct.ComponentSchema {
     Location: Schema.Attribute.String;
     Time: Schema.Attribute.String;
     Title: Schema.Attribute.String;
+  };
+}
+
+export interface SectionsFeaturedNewsSection extends Struct.ComponentSchema {
+  collectionName: 'components_sections_featured_news_sections';
+  info: {
+    displayName: 'FeaturedNewsSection';
+  };
+  attributes: {
+    FeaturedArticle: Schema.Attribute.Component<'layout.news-card', false>;
+    Heading: Schema.Attribute.String;
+    NewsList: Schema.Attribute.Component<'layout.news-card', true>;
+    Subheading: Schema.Attribute.Text;
+    ViewAllButton: Schema.Attribute.Component<'shared.link', false>;
   };
 }
 
@@ -101,7 +130,9 @@ declare module '@strapi/strapi' {
       'layout.card-component': LayoutCardComponent;
       'layout.image-carousel': LayoutImageCarousel;
       'layout.images': LayoutImages;
+      'layout.news-card': LayoutNewsCard;
       'sections.event-item': SectionsEventItem;
+      'sections.featured-news-section': SectionsFeaturedNewsSection;
       'shared.link': SharedLink;
       'shared.social-link': SharedSocialLink;
       'strip-banner.strip-baneer': StripBannerStripBaneer;

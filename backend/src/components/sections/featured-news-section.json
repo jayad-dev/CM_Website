@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_sections_featured_news_sections",
+  "info": {
+    "displayName": "FeaturedNewsSection"
+  },
+  "options": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "Subheading": {
+      "type": "text"
+    },
+    "FeaturedArticle": {
+      "type": "component",
+      "component": "layout.news-card",
+      "repeatable": false
+    },
+    "NewsList": {
+      "type": "component",
+      "component": "layout.news-card",
+      "repeatable": true
+    },
+    "ViewAllButton": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

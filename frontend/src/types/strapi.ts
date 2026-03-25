@@ -178,6 +178,40 @@ export interface UpcomingEventsData {
   Subheading?: string;
   EventItems?: UpcomingEventItem[];
 }
+
+// LatestNews Types
+
+export interface CategoryItem {
+  id: number;
+  name: string;
+  url?: string;
+}
+
+export interface NewsItem {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  slug?: string;
+  image?: MediaData | any;
+  category?: CategoryItem;
+}
+
+export interface LatestNewsData {
+  id: number;
+  Heading: string;
+  Subheading: string;
+  FeaturedArticle: NewsItem | null;
+  NewsList: NewsItem[];
+  // Backend stores categories per news card (`CategoryList` inside the card),
+  // not a top-level category list.
+  CategoryList?: CategoryItem[];
+  ViewAllButton?: {
+    id?: number;
+    label?: string;
+    url?: string;
+  };
+}
 export interface StrapiResponse<T> {
   data: T;
   meta?: {
