@@ -106,7 +106,7 @@ export async function getUpcomingEvents() {
 export async function getLatestNews() {
   try {
     const res = await api.get(
-      "/api/home-page-banner?populate[LatestNews][populate][FeaturedArticle][populate][Image]=true&  [LatestNews][populate][FeaturedArticle][populate][CategoryList]=true&populate[LatestNews][populate][NewsList][populate][Image]=true&populate[LatestNews][populate][NewsList][populate][CategoryList]=true&populate[LatestNews][populate][ViewAllButton]=true"
+      "/api/home-page-banner?populate[LatestNews][populate][FeaturedArticle][populate][Image]=true&populate[LatestNews][populate][FeaturedArticle][populate][CategoryList]=true&populate[LatestNews][populate][NewsList][populate][Image]=true&populate[LatestNews][populate][NewsList][populate][CategoryList]=true&populate[LatestNews][populate][ViewAllButton]=true"
     );
     const root = res?.data?.data;
     const attrs = root?.attributes ?? root;
@@ -127,25 +127,35 @@ export async function getLatestNews() {
       return media as unknown as MediaData;
     };
 
-    const normalizeCategory = (
+    const normalizeCategoryList = (
       list: unknown
-    ): { id: number; name: string; url?: string } | undefined => {
-      const first = Array.isArray(list) ? (list[0] as unknown) : undefined;
-      const ff = asObj(first);
-      if (!ff) return undefined;
-      return {
-        id: typeof ff["id"] === "number" ? (ff["id"] as number) : 0,
-        name:
-          (typeof ff["label"] === "string" && (ff["label"] as string)) ||
-          (typeof ff["name"] === "string" && (ff["name"] as string)) ||
-          "",
-        url: typeof ff["url"] === "string" ? (ff["url"] as string) : undefined,
-      };
+    ): { id: number; name: string; url?: string }[] => {
+      if (!Array.isArray(list)) return [];
+      return (list as unknown[])
+        .map((item) => {
+          const ff = asObj(item);
+          if (!ff) return null;
+          const name =
+            (typeof ff["label"] === "string" && (ff["label"] as string)) ||
+            (typeof ff["name"] === "string" && (ff["name"] as string)) ||
+            "";
+          if (!name) return null;
+          return {
+            id: typeof ff["id"] === "number" ? (ff["id"] as number) : 0,
+            name,
+            url:
+              typeof ff["url"] === "string" ? (ff["url"] as string) : undefined,
+          };
+        })
+        .filter(Boolean) as { id: number; name: string; url?: string }[];
     };
 
     const normalizeCard = (card: unknown) => {
       const cc = asObj(card);
       if (!cc) return null;
+      const categories = normalizeCategoryList(
+        cc["CategoryList"] ?? cc["categoryList"]
+      );
       return {
         id: typeof cc["id"] === "number" ? (cc["id"] as number) : 0,
         title:
@@ -167,16 +177,52 @@ export async function getLatestNews() {
           (typeof cc["slug"] === "string" && (cc["slug"] as string)) ||
           undefined,
         image: normalizeMedia(cc["Image"] ?? cc["image"]),
-        category: normalizeCategory(cc["CategoryList"] ?? cc["categoryList"]),
+        category: categories[0],
+        categories,
       };
     };
+
+    type NormalizedCategory = { id: number; name: string; url?: string };
+    type NormalizedCard = {
+      id: number;
+      title: string;
+      description: string;
+      date: string;
+      slug?: string;
+      image?: MediaData;
+      category?: NormalizedCategory;
+      categories: NormalizedCategory[];
+    } | null;
+
+    const featured = normalizeCard(latest?.FeaturedArticle) as NormalizedCard;
+    const newsList = ((latest?.NewsList ?? [])
+      .map(normalizeCard)
+      .filter(Boolean) as unknown[]) as Exclude<NormalizedCard, null>[];
+
+    const categoryMap = new Map<string, NormalizedCategory>();
+    const addCats = (cats: unknown) => {
+      if (!Array.isArray(cats)) return;
+      (cats as NormalizedCategory[]).forEach((c) => {
+        if (!c?.name) return;
+        const key = String(c.name).toLowerCase().trim();
+        if (!key) return;
+        if (!categoryMap.has(key)) categoryMap.set(key, c);
+      });
+    };
+    addCats(featured ? featured.categories : undefined);
+    newsList.forEach((n) => addCats(n.categories));
+
+    const categoriesForUi = Array.from(categoryMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
 
     return {
       id: latest?.id ?? 0,
       Heading: latest?.Heading ?? "",
       Subheading: latest?.Subheading ?? "",
-      FeaturedArticle: normalizeCard(latest?.FeaturedArticle),
-      NewsList: (latest?.NewsList ?? []).map(normalizeCard).filter(Boolean),
+      FeaturedArticle: featured,
+      NewsList: newsList,
+      CategoryList: categoriesForUi,
       ViewAllButton: latest?.ViewAllButton,
     };
   } catch (error) {

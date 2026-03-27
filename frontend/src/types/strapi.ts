@@ -195,6 +195,7 @@ export interface NewsItem {
   slug?: string;
   image?: MediaData | any;
   category?: CategoryItem;
+  categories?: CategoryItem[];
 }
 
 export interface LatestNewsData {
@@ -203,8 +204,6 @@ export interface LatestNewsData {
   Subheading: string;
   FeaturedArticle: NewsItem | null;
   NewsList: NewsItem[];
-  // Backend stores categories per news card (`CategoryList` inside the card),
-  // not a top-level category list.
   CategoryList?: CategoryItem[];
   ViewAllButton?: {
     id?: number;

@@ -34,7 +34,7 @@ const LatestNewsLeft = ( { article }: Props ) => {
                 } }
             >
                 <Stack gap={ 6 }>
-                    <Badge color="orange">
+                    <Badge color="#FF6B35">
                         { article.category?.name }
                     </Badge>
 
