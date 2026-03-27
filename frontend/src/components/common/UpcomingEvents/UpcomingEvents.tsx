@@ -19,7 +19,7 @@ export default function UpcomingEvents( { data }: Props ) {
     );
 
     return (
-        <Box bg="#FDF6F0" w="100%">
+        <Box w="100%">
             <Box
                 pt={ 100 }
                 pb={ 180 }
