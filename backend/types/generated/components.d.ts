@@ -87,6 +87,22 @@ export interface SectionsFeaturedNewsSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHero extends Struct.ComponentSchema {
+  collectionName: 'components_shared_heroes';
+  info: {
+    displayName: 'Hero';
+  };
+  attributes: {
+    BackgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    Description: Schema.Attribute.Text;
+    PrimaryButton: Schema.Attribute.Component<'shared.link', false>;
+    SecondaryButton: Schema.Attribute.Component<'shared.link', false>;
+    Title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -133,6 +149,7 @@ declare module '@strapi/strapi' {
       'layout.news-card': LayoutNewsCard;
       'sections.event-item': SectionsEventItem;
       'sections.featured-news-section': SectionsFeaturedNewsSection;
+      'shared.hero': SharedHero;
       'shared.link': SharedLink;
       'shared.social-link': SharedSocialLink;
       'strip-banner.strip-baneer': StripBannerStripBaneer;

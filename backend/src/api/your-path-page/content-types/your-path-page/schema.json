@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "your_path_pages",
+  "info": {
+    "singularName": "your-path-page",
+    "pluralName": "your-path-pages",
+    "displayName": "YourPathPage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "PageContent": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.hero"
+      ]
+    }
+  }
+}

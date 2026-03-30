@@ -211,6 +211,29 @@ export interface LatestNewsData {
     url?: string;
   };
 }
+export interface HeroButton {
+  id?: number;
+  label: string;
+  href: string;
+}
+
+export interface HeroSectionData {
+  id?: number;
+  Title: string;
+  Description: string;
+  BackgroundImage?: MediaData;
+  PrimaryButton?: HeroButton;
+  SecondaryButton?: HeroButton;
+}
+
+export interface YourPathPageData {
+  id?: number;
+  documentId?: string;
+  Hero?: HeroSectionData;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+}
 export interface StrapiResponse<T> {
   data: T;
   meta?: {
@@ -233,4 +256,20 @@ export interface StrapiCollectionResponse<T> {
       total: number;
     };
   };
+}
+
+export interface HeroComponentData {
+  __component: string;
+  Title: string;
+  Description: string;
+  BackgroundImage: MediaData | { url: string } | any;
+  PrimaryButton?: { label?: string; url?: string };
+  SecondaryButton?: { label?: string; url?: string };
+}
+
+export interface YourPathPageData {
+  PageContent?: HeroComponentData[];
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
 }

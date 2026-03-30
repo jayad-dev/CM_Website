@@ -675,6 +675,34 @@ export interface ApiUpcommingEventsUpcommingEvents
   };
 }
 
+export interface ApiYourPathPageYourPathPage extends Struct.SingleTypeSchema {
+  collectionName: 'your_path_pages';
+  info: {
+    displayName: 'YourPathPage';
+    pluralName: 'your-path-pages';
+    singularName: 'your-path-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::your-path-page.your-path-page'
+    > &
+      Schema.Attribute.Private;
+    PageContent: Schema.Attribute.DynamicZone<['shared.hero']>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1193,6 +1221,7 @@ declare module '@strapi/strapi' {
       'api::home-page-banner.home-page-banner': ApiHomePageBannerHomePageBanner;
       'api::home-page-card.home-page-card': ApiHomePageCardHomePageCard;
       'api::upcomming-events.upcomming-events': ApiUpcommingEventsUpcommingEvents;
+      'api::your-path-page.your-path-page': ApiYourPathPageYourPathPage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

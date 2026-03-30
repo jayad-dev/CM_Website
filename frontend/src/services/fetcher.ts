@@ -1,6 +1,7 @@
 import { api } from "./api";
 import type { MediaData } from "@/types/strapi";
 import type { AxiosError } from "axios";
+import type { YourPathPageData } from "@/types/strapi";
 
 export async function getHeader() {
   try {
@@ -8,6 +9,26 @@ export async function getHeader() {
     return res.data.data;
   } catch (error) {
     console.error("Error fetching header:", error);
+    return null;
+  }
+}
+
+export async function getYourPathPage(): Promise<YourPathPageData | null> {
+  try {
+    const res = await api.get(
+      "/api/your-path-page?populate[PageContent][on][shared.hero][populate][BackgroundImage]=true&populate[PageContent][on][shared.hero][populate][PrimaryButton]=true&populate[PageContent][on][shared.hero][populate][SecondaryButton]=true"
+    );
+    const root = res?.data?.data;
+    const attrs = root?.attributes ?? root;
+    if (!attrs) return null;
+    return attrs as YourPathPageData;
+  } catch (error) {
+    const err = error as AxiosError<unknown> & { isAxiosError?: boolean };
+    console.error("Error fetching your-path page:", {
+      message: err.message,
+      status: err.response?.status,
+      data: err.response?.data,
+    });
     return null;
   }
 }

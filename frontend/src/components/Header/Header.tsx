@@ -17,12 +17,15 @@ import { useState } from "react";
 import { HeaderData } from "@/types/strapi";
 import { getMediaUrl } from "@/lib/strapi";
 import { APP_MENU_LINKS, APP_ROUTES } from "@/app/routes";
+import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   data: HeaderData | null;
 }
 
 export default function Header( { data }: HeaderProps ) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [openSearch, setOpenSearch] = useState( false );
   const [opened, setOpened] = useState( false );
 
@@ -52,11 +55,16 @@ export default function Header( { data }: HeaderProps ) {
       <Box
         component="header"
         style={ {
-          background: "#7B2E36",
+          background: isHome
+            ? "#7B2E36"
+            : "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 100%)",
+          backdropFilter: isHome ? "none" : "saturate(150%) blur(6px)",
           position: "fixed",
           top: 0,
+          left: 0,
           width: "100%",
           zIndex: 1000,
+          boxShadow: isHome ? undefined : "0 1px 0 rgba(255,255,255,0.08)",
         } }
       >
         <Container size="xl" py={ 12 }>
@@ -95,6 +103,16 @@ export default function Header( { data }: HeaderProps ) {
                   radius="md"
                   autoFocus
                   onBlur={ () => setOpenSearch( false ) }
+                  styles={ {
+                    input: {
+                      color: isHome ? "inherit" : "white",
+                      background: isHome ? "white" : "transparent",
+                      border: isHome ? "1px solid #e9ecef" : "1px solid rgba(255,255,255,0.6)",
+                    },
+                    section: {
+                      color: "white",
+                    },
+                  } }
                 />
               ) : (
                 <FiSearch
